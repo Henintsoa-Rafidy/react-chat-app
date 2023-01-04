@@ -49,11 +49,48 @@
                 border: none;
                 cursor: pointer;
             }
+
+            label {
+                display: flex;
+                align-items: center;
+                gap: 7px;
+                color: #8da4f1;
+                font-size: 12px;
+                cursor: pointer;
+
+                img {
+                    width: 32px;
+                }
+            }
         }
 
         p {
             color: #5b5d8d;
             font-size: 12px;
+            margin-top : 10px;
         }
     }
+}
+
+.home {
+    background-color: #a7bcff;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container {
+    border: 1px solid white;
+    border-radius: 10px;
+    width: 65%;
+    height: 80%;
+    display: flex;
+    overflow: hidden;
+
+    .sidebar{
+        flex: 1;
+        background-color: #3e3c61;
+    }
+    .chat{flex: 2;}
 }
