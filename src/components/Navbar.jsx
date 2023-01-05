@@ -1,7 +1,16 @@
 import React from 'react'
 
-export const Navbar = () => {
+const Navbar = () => {
   return (
-    <div>Navbar</div>
+    <div className='navbar'>
+      <span className="logo">Dark Chat</span>
+      <div className="user">
+        <img src="" alt="" />
+        <span>John</span>
+        <button>Logout</button>
+      </div>
+    </div>
   )
 }
+
+export default Navbar;

@@ -1,7 +1,19 @@
 import React from 'react'
 
-export const Search = () => {
+const Search = () => {
   return (
-    <div>Search</div>
+    <div className='search'>
+      <div className="searchForm">
+        <input type="text" placeholder='find a user' name="" id="" />
+      </div>
+      <div className="userChat">
+        <img src="" alt="" />
+        <div className="userChatInfo">
+          <span className="jane">Jane</span>
+        </div>
+      </div>
+    </div>
   )
 }
+
+export  default Search
