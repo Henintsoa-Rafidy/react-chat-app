@@ -1,4 +1,5 @@
 import React from 'react'
+import Pokeball from '../img/pokeball.png'
 
 const Search = () => {
   return (
@@ -7,7 +8,7 @@ const Search = () => {
         <input type="text" placeholder='find a user' name="" id="" />
       </div>
       <div className="userChat">
-        <img src="" alt="" />
+        <img src={Pokeball} alt="" />
         <div className="userChatInfo">
           <span className="jane">Jane</span>
         </div>
