@@ -5,12 +5,13 @@ import { auth, storage, db } from '../firebase';
 import { useState } from 'react';
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { doc, setDoc } from "firebase/firestore"; 
-//import { collection, addDoc } from "firebase/firestore"; 
+import { useNavigate } from 'react-router-dom';
 
 
 const Register = () => {
   
   const [err, setErr] = useState(false);
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -65,16 +66,19 @@ const Register = () => {
             try {
               console.log('trying')
 
-              const docRef = await setDoc(doc(db, "users", res.user.uid), {
+              await setDoc(doc(db, "users", res.user.uid), {
                 uid: res.user.uid,
+                displayName,
                 email,
-                password,
                 photoURL: downloadURL
               });
 
-              console.log("tried");
-              console.log("Document written with ID: ", docRef.id);
-            
+              console.log("file data saved");
+              
+              await setDoc(doc(db, "usersChat", res.user.uid), {});
+              
+              navigate("/");
+
             } catch (e) {
               console.error("Error adding document: ", e);
             }
