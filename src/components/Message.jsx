@@ -1,9 +1,16 @@
 import React from 'react'
+import { useContext } from 'react'
+import { AuthContext } from '../context/AuthContext'
+import { ChatContext } from '../context/ChatContext'
 import Pokeball from '../img/pokeball.png'
 
-const Message = () => {
+const Message = ({message}) => {
+
+  const {currentUser} = useContext(AuthContext);
+  const {data} = useContext(ChatContext);
+
   return (
-    <div className='message owner'>
+    {/* <div className='message owner'>
       <div className="messageInfo">
         <img src={Pokeball} alt=""/> 
         <span>Just now</span>
@@ -13,7 +20,7 @@ const Message = () => {
         <p>Hello !!!</p>
         <img src={Pokeball} alt=""/> 
       </div>
-    </div>
+  </div>*/}
   )
 }
 

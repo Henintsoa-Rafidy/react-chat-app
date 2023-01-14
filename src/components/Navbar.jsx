@@ -7,8 +7,6 @@ const Navbar = () => {
 
   const {currentUser} = useContext(AuthContext);
 
-  console.log("user got in Navbar : ", currentUser)
-
   return (
     <div className='navbar'>
       <span className="logo">Dark Chat</span>
