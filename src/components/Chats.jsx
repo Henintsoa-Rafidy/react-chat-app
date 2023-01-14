@@ -1,30 +1,47 @@
-import React from 'react'
-import Pokeball from '../img/pokeball.png'
+import React, { useState } from 'react'
+import { useEffect } from 'react';
+import { doc, onSnapshot } from "firebase/firestore";
+import { db } from '../firebase';
+import { useContext } from 'react';
+import { AuthContext } from '../context/AuthContext';
+
 
 const Chats = () => {
+
+  const [chats, setChats] = useState([]);
+
+  const {currentUser} = useContext(AuthContext);
+  
+  useEffect(() => {
+    const getChats = async () => {
+      const unsub = onSnapshot(doc(db, "usersChat", currentUser.uid), (doc) => {      
+        setChats(doc.data());
+        
+        return () => {
+          unsub();
+        }
+        
+      });
+    }
+
+    currentUser.uid && getChats();
+
+  }, [currentUser.uid]);
+  
+  console.log('Chats : ', console.log(Object.entries(chats)));
+  
   return (
     <div className="chats">
-      <div className="userChat">
-        <img src={Pokeball} alt="" />
-        <div className="userChatInfo">
-          <span className="jane">Jane</span>
-          <p>Hello world</p>
-        </div>
-      </div>
-      <div className="userChat">
-        <img src={Pokeball} alt="" />
-        <div className="userChatInfo">
-          <span className="jane">Jane</span>
-          <p>Hello world</p>
-        </div>
-      </div>
-      <div className="userChat">
-        <img src={Pokeball} alt="" />
-        <div className="userChatInfo">
-          <span className="jane">Jane</span>
-          <p>Hello world</p>
-        </div>
-      </div>
+      {Object.entries(chats).map((chat) => (
+        <div className="userChat" key={chat[0]}>
+          <img src={chat[1].userInfo.photoURL} alt="" />
+          <div className="userChatInfo">
+            <span className="jane">{chat[1].userInfo.displayName}</span>
+            <p>{chat[1].userInfo.lastMesssage?.text}</p>
+          </div>
+        </div>        
+      ))}
+
     </div>
   )
 }
