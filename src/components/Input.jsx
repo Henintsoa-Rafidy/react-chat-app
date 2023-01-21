@@ -4,7 +4,7 @@ import Image from '../img/addAvatar.png'
 import { AuthContext } from '../context/AuthContext';
 import { ChatContext } from '../context/ChatContext';
 import { useState } from 'react';
-import { arrayUnion, doc, Timestamp, updateDoc } from 'firebase/firestore';
+import { arrayUnion, doc, serverTimestamp, Timestamp, updateDoc } from 'firebase/firestore';
 import { v4 as uuid } from 'uuid';
 import { db, storage } from '../firebase';
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
@@ -71,11 +71,27 @@ const Input = () => {
         })
       })
     }
+
+    //last message of the logged in user
+    await updateDoc(doc(db, "usersChat", currentUser.uid), {
+      [data.chatId + ".lastMessage"]: { text },
+      [data.chatId + ".date"]: serverTimestamp() 
+    })
+
+    //last message of the person the logged in user is talking to
+    await updateDoc(doc(db, "usersChat", data.user.uid), {
+      [data.chatId + ".lastMessage"]: { text },
+      [data.chatId + ".date"]: serverTimestamp() 
+    })
+
+    // Reseting text and img
+    setText("");
+    setImg(null)
   }
 
   return (
     <div className='input'>
-      <input type="text" placeholder="Type something ..." id="" onChange={e => setText(e.target.value)}/>
+      <input type="text" placeholder="Type something ..." id="" onChange={e => setText(e.target.value)} value={ text ? text : ""} />
       <div className="send">
         <img src={Trombone} alt="" />
         <input type="file" style={{display: 'none'}} id="file" onChange={e => setImg(e.target.files[0])}/>
