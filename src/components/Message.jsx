@@ -10,7 +10,7 @@ const Message = ({message}) => {
   const {data} = useContext(ChatContext);
 
   return (
-    {/* <div className='message owner'>
+    <div className='message owner'>
       <div className="messageInfo">
         <img src={Pokeball} alt=""/> 
         <span>Just now</span>
@@ -20,7 +20,7 @@ const Message = ({message}) => {
         <p>Hello !!!</p>
         <img src={Pokeball} alt=""/> 
       </div>
-  </div>*/}
+  </div>
   )
 }
 

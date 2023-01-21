@@ -24,7 +24,7 @@ const Register = () => {
     try {
       const res = await createUserWithEmailAndPassword(auth, email, password);
 
-      console.log(res.user);
+      //console.log(res.user);
 
       const storageRef = ref(storage, 'gs://chat-42c51.appspot.com/' + displayName);
 
