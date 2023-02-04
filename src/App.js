@@ -23,10 +23,10 @@ function App() {
     return children
   };
 
-  console.log(currentUser);
+  console.log("current user", currentUser);
 
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
       <Routes>
         <Route path="/">
           <Route index element={ <ProtectedRoute><Home/></ProtectedRoute> }/>
